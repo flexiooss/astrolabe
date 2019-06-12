@@ -14,7 +14,7 @@ export class ComponentAstrolabePublic {
     )
     /**
      * @private
-     * @property {ComponentAstrolabe} ComponentFilterPublic.__component
+     * @property {ComponentAstrolabe} ComponentAstrolabe.__component
      */
     this[__component] = component
   }
@@ -52,7 +52,7 @@ export class ComponentAstrolabePublic {
    * @return Month
    */
   getMonth(year, month) {
-    return tthis[__component].getMonth(year,  month)
+    return this[__component].getMonth(year, month)
   }
 
   /**
@@ -71,6 +71,6 @@ export class ComponentAstrolabePublic {
    * @return Array<Week>
    */
   getWeek(year, weekNumber) {
-    return  this[__component].getWeek(year,  weekNumber)
+    return this[__component].getWeek(year, weekNumber)
   }
 }

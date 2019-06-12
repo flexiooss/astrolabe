@@ -1,6 +1,6 @@
 'use strict'
 import '../../../index'
-import {PublicStoreHandler, TypeCheck} from '@flexio-oss/hotballoon'
+import {TypeCheck} from '@flexio-oss/hotballoon'
 import {assert} from '@flexio-oss/assert'
 import {StoreCalendarUtils} from '../stores/StoreCalendarUtils/StoreCalendarUtils'
 import {StoreCalendarHandler} from '../stores/StoreCalendarUtils/StoreCalendarHandler'
@@ -30,12 +30,6 @@ export class ComponentAstrolabe {
      * @private
      */
     this.__storeHandler = new StoreCalendarHandler(this.__storeCalendar.store(), this.__startingDay)
-
-    /**
-     *
-     * @type {PublicStoreHandler}
-     */
-    this.publicStoreHandler = new PublicStoreHandler(this.__storeCalendar.store())
   }
 
   /**
@@ -73,7 +67,7 @@ export class ComponentAstrolabe {
    * @return Month
    */
   getMonth(year, month) {
-    return this.__storeHandler.getMonth(year,  month)
+    return this.__storeHandler.getMonth(year, month)
   }
 
   /**
@@ -89,9 +83,13 @@ export class ComponentAstrolabe {
    *
    * @param {number} year
    * @param {number} weekNumber
-   * @return Array<Week>
+   * @return DayList
    */
   getWeek(year, weekNumber) {
-    return this.__storeHandler.getWeek(year,  weekNumber)
+    return this.__storeHandler.getWeek(year, weekNumber)
+  }
+
+  publicStoreHandler() {
+    return this.__storeCalendar.storePublic()
   }
 }

@@ -5,12 +5,14 @@ export class ComponentAstrolabeBuilder {
   /**
    *
    * @param {HotBalloonApplication} APP
+   * @param {DaysEnum} startingDay
    * @return {ComponentAstrolabePublic}
    */
-  static build(APP) {
+  static build(APP, startingDay) {
     return new ComponentAstrolabePublic(
       new ComponentAstrolabe(
-        APP.addComponentContext()
+        APP.addComponentContext(),
+        startingDay
       )
     )
   }

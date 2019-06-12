@@ -20,7 +20,7 @@ export class TestGenerateCalendar extends TestCase {
 
   testWeekbetweenToYearsStructure() {
     this.__component.addWeek(2019, 1)
-    assert.deepEqual(2, this.__component.publicStoreHandler.state().data.years().size)
+    assert.deepEqual(2, this.__component.publicStoreHandler().state().data.years().size)
     assert.deepEqual(1, this.__component.getYear(2018).months().size)
     assert.deepEqual(1, this.__component.getYear(2019).months().size)
     assert.deepEqual(6, this.__component.getMonth(2018, 11).weeks().size)

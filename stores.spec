@@ -1,3 +1,3 @@
 StoreCalendar:
   years:
-    $value-object: io.flexio.calendar_generator.types.YearList
+    $value-object: io.flexio.astrolabe.types.YearList
