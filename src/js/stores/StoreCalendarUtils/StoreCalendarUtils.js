@@ -3,8 +3,8 @@ import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 import {assertType} from '@flexio-oss/assert'
 import {YearList} from '../../types/calendar/YearList'
 
-const StoreCalendar = globalFlexioImport.io.flexio.calendar_generator.stores.StoreCalendar
-const StoreCalendarBuilder = globalFlexioImport.io.flexio.calendar_generator.stores.StoreCalendarBuilder
+const StoreCalendar = globalFlexioImport.io.flexio.astrolabe.stores.StoreCalendar
+const StoreCalendarBuilder = globalFlexioImport.io.flexio.astrolabe.stores.StoreCalendarBuilder
 
 export class StoreCalendarUtils {
   constructor(componentContext) {
