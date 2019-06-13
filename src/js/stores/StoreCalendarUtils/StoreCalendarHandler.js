@@ -34,7 +34,7 @@ export class StoreCalendarHandler {
     let firstDayOfWeek = new DateExtended(year, 0, 1)
     let w = 7 * (weekNumber - 1) - (((firstDayOfWeek.getDay() - this.__startingDay) + 7) % 7)
     firstDayOfWeek.setDate(w + 1)
-    return  firstDayOfWeek
+    return firstDayOfWeek
   }
 
   /**
@@ -43,6 +43,9 @@ export class StoreCalendarHandler {
    * @param {Number} month
    */
   addMonth(year, month) {
+    let MonthDate = new DateExtended(year, month)
+    year = MonthDate.getFullYear()
+    month = MonthDate.getMonth()
     let res = null
     let yearList = this.__calendar().years()
     if (!this.__calendar().years().has(year)) {
@@ -54,6 +57,8 @@ export class StoreCalendarHandler {
       yearList.get(year)
         .months().set(month, res)
       this.__store.set(this.__store.state().data.withYears(yearList))
+    } else {
+      res = this.getMonth(year, month)
     }
     return res
   }
@@ -92,7 +97,6 @@ export class StoreCalendarHandler {
     return this.getWeek(year, weekNumber)
   }
 
-
   /**
    *
    * @param {number} year
@@ -109,9 +113,11 @@ export class StoreCalendarHandler {
    * @return {Month}
    */
   getMonth(year, month) {
+    let MonthDate = new DateExtended(year, month)
+    year = MonthDate.getFullYear()
+    month = MonthDate.getMonth()
     return this.__calendar().years().get(year).months().get(month)
   }
-
 
   /**
    *
@@ -129,19 +135,19 @@ export class StoreCalendarHandler {
     let firstDayOfWeek = this.__firstDayOfWeek(year, weekNumber)
 
     let monthSize = firstDayOfWeek.getDaysInMonth()
-    if (yearList.has(firstDayOfWeek.getFullYear())
-      && yearList.get(firstDayOfWeek.getFullYear()).months().has(firstDayOfWeek.getMonth())) {
-        res = yearList.get(firstDayOfWeek.getFullYear())
-            .months().get(firstDayOfWeek.getMonth())
-            .weeks().get(GetDate.getWeekIdInMonth(firstDayOfWeek, this.__startingDay)).days()
+    if (yearList.has(firstDayOfWeek.getFullYear()) &&
+      yearList.get(firstDayOfWeek.getFullYear()).months().has(firstDayOfWeek.getMonth())) {
+      res = yearList.get(firstDayOfWeek.getFullYear())
+        .months().get(firstDayOfWeek.getMonth())
+        .weeks().get(GetDate.getWeekIdInMonth(firstDayOfWeek, this.__startingDay)).days()
     }
     if ((firstDayOfWeek.getDate() + 6) > monthSize) {
       firstDayOfWeek.setMonth(firstDayOfWeek.getMonth() + 1, 1)
-      if (yearList.has(firstDayOfWeek.getFullYear())
-        && yearList.get(firstDayOfWeek.getFullYear()).months().has(firstDayOfWeek.getMonth())) {
+      if (yearList.has(firstDayOfWeek.getFullYear()) &&
+        yearList.get(firstDayOfWeek.getFullYear()).months().has(firstDayOfWeek.getMonth())) {
         res = new DayList([...res, ...yearList.get(firstDayOfWeek.getFullYear())
-            .months().get(firstDayOfWeek.getMonth())
-            .weeks().get(0).days()]
+          .months().get(firstDayOfWeek.getMonth())
+          .weeks().get(0).days()]
         )
       }
     }

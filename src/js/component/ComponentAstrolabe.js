@@ -1,5 +1,5 @@
 'use strict'
-import '../../../index'
+import '../../../import'
 import {TypeCheck} from '@flexio-oss/hotballoon'
 import {assert} from '@flexio-oss/assert'
 import {StoreCalendarUtils} from '../stores/StoreCalendarUtils/StoreCalendarUtils'
