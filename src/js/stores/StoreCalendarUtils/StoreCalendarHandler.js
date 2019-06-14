@@ -1,8 +1,9 @@
 import {GetDate} from '../../utils/GetDate'
-import {DateExtended} from '@flexio-oss/extended-flex-types'
 import {MonthList} from '../../types/year/MonthList'
 import {Year} from '../../types/Year'
 import {DayList} from '../../types/week/DayList'
+import {DateExtended} from '@flexio-oss/extended-flex-types'
+import {assert, isNumber} from '@flexio-oss/assert'
 
 export class StoreCalendarHandler {
   /**
@@ -43,6 +44,14 @@ export class StoreCalendarHandler {
    * @param {Number} month
    */
   addMonth(year, month) {
+    assert(
+      isNumber(year), 'StoreCalendarHandler:addMonth: year should be a number, `%s` given',
+      typeof (year)
+    )
+    assert(
+      isNumber(month), 'StoreCalendarHandler:addMonth: month should be a number, `%s` given',
+      typeof (month)
+    )
     let MonthDate = new DateExtended(year, month)
     year = MonthDate.getFullYear()
     month = MonthDate.getMonth()
@@ -69,6 +78,10 @@ export class StoreCalendarHandler {
    * @return {Year}
    */
   addYear(year) {
+    assert(
+      isNumber(year), 'StoreCalendarHandler:addYear: year should be a number, `%s` given',
+      typeof (year)
+    )
     let yearList = this.__calendar().years()
     if (!(yearList.has(year) && yearList.months().size === 12)) {
       for (let i = 0; i < 12; i++) {
@@ -85,6 +98,14 @@ export class StoreCalendarHandler {
    * @return {DayList}
    */
   addWeek(year, weekNumber) {
+    assert(
+      isNumber(year), 'StoreCalendarHandler:addWeek: year should be a number, `%s` given',
+      typeof (year)
+    )
+    assert(
+      isNumber(weekNumber), 'StoreCalendarHandler:addWeek: weekNumber should be a number, `%s` given',
+      typeof (weekNumber)
+    )
     let firstDayOfWeek = this.__firstDayOfWeek(year, weekNumber)
 
     let monthSize = firstDayOfWeek.getDaysInMonth()
@@ -103,6 +124,10 @@ export class StoreCalendarHandler {
    * @return {Year}
    */
   getYear(year) {
+    assert(
+      isNumber(year), 'StoreCalendarHandler:getYear: year should be a number, `%s` given',
+      typeof (year)
+    )
     return this.__calendar().years().get(year)
   }
 
@@ -113,6 +138,14 @@ export class StoreCalendarHandler {
    * @return {Month}
    */
   getMonth(year, month) {
+    assert(
+      isNumber(year), 'StoreCalendarHandler:getMonth: year should be a number, `%s` given',
+      typeof (year)
+    )
+    assert(
+      isNumber(month), 'StoreCalendarHandler:getMonth: month should be a number, `%s` given',
+      typeof (month)
+    )
     let MonthDate = new DateExtended(year, month)
     year = MonthDate.getFullYear()
     month = MonthDate.getMonth()
@@ -126,6 +159,14 @@ export class StoreCalendarHandler {
    * @return {DayList}
    */
   getWeek(year, weekNumber) {
+    assert(
+      isNumber(year), 'StoreCalendarHandler:getWeek: year should be a number, `%s` given',
+      typeof (year)
+    )
+    assert(
+      isNumber(weekNumber), 'StoreCalendarHandler:getWeek: weekNumber should be a number, `%s` given',
+      typeof (weekNumber)
+    )
     let yearList = this.__calendar().years()
     /**
      *
