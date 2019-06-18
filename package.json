@@ -4,7 +4,7 @@
   "version": "0.0.0-dev",
   "main": "index.js",
   "author": "Antoine Bachetti (https://github.com/Basheitan)",
-  "repository": "",
+  "repository": "git@github.com:flexiooss/astrolabe.git",
   "hotballoon-shed": {
     "builder": "webpack4",
     "test": {

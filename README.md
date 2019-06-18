@@ -25,7 +25,7 @@ DaysEnum = {
 - addWeek(year: number, weekNumber: number)
 - getYear(year: number) : Year
 - getMonth(year: number, month: number) : Month
-- getWeek(year: number, weekNumber: number) : Array<Week>
+- getWeek(year: number, weekNumber: number) : DayList
 
 ```yaml
 Year:

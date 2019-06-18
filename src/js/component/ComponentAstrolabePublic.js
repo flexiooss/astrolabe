@@ -68,7 +68,7 @@ export class ComponentAstrolabePublic {
    *
    * @param {number} year
    * @param {number} weekNumber
-   * @return Array<Week>
+   * @return DayList
    */
   getWeek(year, weekNumber) {
     return this[__component].getWeek(year, weekNumber)
