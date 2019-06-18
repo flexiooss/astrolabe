@@ -42,7 +42,7 @@ export class ComponentAstrolabePublic {
    * @param {number} weekNumber
    */
   addWeek(year, weekNumber) {
-    this[__component].addWeek(year, weekNumber)
+    return this[__component].addWeek(year, weekNumber)
   }
 
   /**

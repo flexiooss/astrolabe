@@ -66,16 +66,12 @@ export class StoreCalendarHandler {
       yearList.get(year)
         .months().set(month, res)
       this.__store.set(this.__store.state().data.withYears(yearList))
-    } else {
-      res = this.getMonth(year, month)
     }
-    return res
   }
 
   /**
    *
    * @param {Number} year
-   * @return {Year}
    */
   addYear(year) {
     assert(
@@ -88,14 +84,12 @@ export class StoreCalendarHandler {
         this.addMonth(year, i)
       }
     }
-    return this.getYear(year)
   }
 
   /**
    *
    * @param {Number} year
    * @param {Number} weekNumber
-   * @return {DayList}
    */
   addWeek(year, weekNumber) {
     assert(
@@ -115,7 +109,6 @@ export class StoreCalendarHandler {
 
       this.addMonth(firstDayOfWeek.getFullYear(), firstDayOfWeek.getMonth())
     }
-    return this.getWeek(year, weekNumber)
   }
 
   /**
@@ -128,7 +121,10 @@ export class StoreCalendarHandler {
       isNumber(year), 'StoreCalendarHandler:getYear: year should be a number, `%s` given',
       typeof (year)
     )
-    return this.__calendar().years().get(year)
+    if (this.__calendar().years().has(year)) {
+      return this.__calendar().years().get(year)
+    }
+    return null
   }
 
   /**
@@ -149,7 +145,11 @@ export class StoreCalendarHandler {
     let MonthDate = new DateExtended(year, month)
     year = MonthDate.getFullYear()
     month = MonthDate.getMonth()
-    return this.__calendar().years().get(year).months().get(month)
+    if (this.__calendar().years().has(year) &&
+      this.__calendar().years().get(year).months().has(month)) {
+      return this.__calendar().years().get(year).months().get(month)
+    }
+    return null
   }
 
   /**
@@ -192,6 +192,9 @@ export class StoreCalendarHandler {
         )
       }
     }
-    return res
+    if (res.size) {
+      return res
+    }
+    return null
   }
 }

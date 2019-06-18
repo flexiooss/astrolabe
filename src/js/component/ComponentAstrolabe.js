@@ -35,10 +35,9 @@ export class ComponentAstrolabe {
   /**
    *
    * @param {number} year
-   * @return {Year}
    */
   addYear(year) {
-    return this.__storeHandler.addYear(year)
+    this.__storeHandler.addYear(year)
   }
 
   /**
@@ -47,17 +46,16 @@ export class ComponentAstrolabe {
    * @param {number} month
    */
   addMonth(year, month) {
-    return this.__storeHandler.addMonth(year, month)
+    this.__storeHandler.addMonth(year, month)
   }
 
   /**
    *
    * @param {number} year
    * @param {number} weekNumber
-   * @return {DayList}
    */
   addWeek(year, weekNumber) {
-    return this.__storeHandler.addWeek(year, weekNumber)
+    this.__storeHandler.addWeek(year, weekNumber)
   }
 
   /**

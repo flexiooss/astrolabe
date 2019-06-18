@@ -6,6 +6,9 @@ import {FakeLogger} from '@flexio-oss/js-logger'
 import {DaysEnum} from '../../js/types/DaysEnum'
 import {DayList} from '../../js/types/week/DayList'
 import {DateExtended} from '@flexio-oss/extended-flex-types'
+import {Year} from '../../js/types/Year'
+import {Month} from '../../js/types/Month'
+import {isNull, isObject} from '@flexio-oss/assert'
 
 const assert = require('assert')
 
@@ -19,18 +22,13 @@ export class TestGenerateCalendar extends TestCase {
   }
 
   testWeekbetweenToYearsStructure() {
+    // week 1 ~ 2019 is between 2018 and 2019
     this.__component.addWeek(2019, 1)
     assert.deepEqual(2, this.__component.publicStoreHandler().state().data.years().size)
     assert.deepEqual(1, this.__component.getYear(2018).months().size)
     assert.deepEqual(1, this.__component.getYear(2019).months().size)
     assert.deepEqual(6, this.__component.getMonth(2018, 11).weeks().size)
     assert.deepEqual(5, this.__component.getMonth(2019, 0).weeks().size)
-  }
-
-  testWeekCutInHalf() {
-    this.__component.addWeek(2019, 1)
-    assert.deepEqual(1, this.__component.getMonth(2018, 11).weeks().get(5).days().size)
-    assert.deepEqual(6, this.__component.getMonth(2019, 0).weeks().get(0).days().size)
   }
 
   testWeekbetweenToYearsContent() {
@@ -47,29 +45,52 @@ export class TestGenerateCalendar extends TestCase {
     assert.deepEqual(expected, actual)
   }
 
+  testWeekCutInHalf() {
+    // week 1 ~ 2019 is between december 2018 and january 2019
+    this.__component.addWeek(2019, 1)
+    assert.deepEqual(1, this.__component.getMonth(2018, 11).weeks().get(5).days().size)
+    assert.deepEqual(6, this.__component.getMonth(2019, 0).weeks().get(0).days().size)
+  }
+
   testAddYear() {
     this.__component.addYear(2019)
-    assert.deepEqual(this.__component.getYear(2019).months().size,  12)
-    assert.deepEqual(this.__component.getYear(2019).year(),  2019)
+    assert.deepEqual(this.__component.getYear(2019).months().size, 12)
+    assert.deepEqual(this.__component.getYear(2019).year(), 2019)
   }
 
   testAddMonth() {
     this.__component.addMonth(2019,2)
-    assert.deepEqual(this.__component.getMonth(2019, 2).month(),  2)
-    assert.deepEqual(this.__component.getMonth(2019, 2).year(),  2019)
-    assert.deepEqual(this.__component.getMonth(2019, 2).weeks().size,  5)
+    assert.deepEqual(this.__component.getMonth(2019, 2).month(), 2)
+    assert.deepEqual(this.__component.getMonth(2019, 2).year(), 2019)
+    assert.deepEqual(this.__component.getMonth(2019, 2).weeks().size, 5)
   }
 
-  testEqualResultYear() {
-    assert.deepEqual(this.__component.addYear(2019), this.__component.getYear(2019))
+  testResultYear() {
+    assert(isNull(this.__component.getYear(2019)))
+    this.__component.addYear(2019)
+    assert(this.__component.getYear(2019) instanceof Year)
+    assert(isObject(this.__component.getYear(2019)))
   }
 
-  testEqualResultMonth() {
-    assert.deepEqual(this.__component.addMonth(2019, 1), this.__component.getMonth(2019, 1))
+  testResultMonth() {
+    assert(isNull(this.__component.getMonth(2019, 8)))
+    this.__component.addMonth(2019, 8)
+    assert(this.__component.getMonth(2019, 8) instanceof Month)
+    assert(isObject(this.__component.getMonth(2019, 8)))
   }
 
-  testEqualResultWeek() {
-    assert.deepEqual(this.__component.addWeek(2019, 2), this.__component.getWeek(2019, 2))
+  testResultWeek() {
+    assert(isNull(this.__component.getWeek(2019, 40)))
+    this.__component.addWeek(2019, 40)
+    assert(this.__component.getWeek(2019, 40) instanceof DayList)
+    assert(isObject(this.__component.getWeek(2019, 40)))
+  }
+
+  testWeekOverflow() {
+    // 2019 has 52 weeks
+    this.__component.addWeek(2019, 60)
+    assert.deepEqual(this.__component.getYear(2019), null)
+    assert(this.__component.getWeek(2020, 8) instanceof DayList)
   }
 }
 runTest(TestGenerateCalendar)
