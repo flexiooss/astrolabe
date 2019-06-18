@@ -122,7 +122,11 @@ class WeekBuilder {
     if (!isNull(days)) {
       assert(days instanceof DayList, 'days should be a DayList')
     }
-    this._days = days
+    let res = new DayList()
+    Array.from(days).forEach(([key, value]) => {
+      res.set(key, DateExtendedBuilder.from(value).build())
+    })
+    this._days = res
     return this
   }
 
