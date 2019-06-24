@@ -6,9 +6,12 @@ import {FakeLogger} from '@flexio-oss/js-logger'
 import {DaysEnum} from '../../js/types/DaysEnum'
 import {DayList} from '../../js/types/week/DayList'
 import {DateExtended} from '@flexio-oss/extended-flex-types'
-import {Year} from '../../js/types/Year'
-import {Month} from '../../js/types/Month'
 import {isNull, isObject} from '@flexio-oss/assert'
+import {globalFlexioImport} from '@flexio-oss/global-import-registry'
+import {FlexDate} from '@flexio-oss/flex-types'
+
+const Month = globalFlexioImport.io.flexio.astrolabe.types.Month
+const Year = globalFlexioImport.io.flexio.astrolabe.types.Year
 
 const assert = require('assert')
 
@@ -34,13 +37,13 @@ export class TestGenerateCalendar extends TestCase {
   testWeekbetweenToYearsContent() {
     this.__component.addWeek(2019, 1)
     let expected = new DayList()
-      .set(0, new DateExtended(2018, 12, 31))
-      .set(1, new DateExtended(2019, 1, 1))
-      .set(2, new DateExtended(2019, 1, 2))
-      .set(3, new DateExtended(2019, 1, 3))
-      .set(4, new DateExtended(2019, 1, 4))
-      .set(5, new DateExtended(2019, 1, 5))
-      .set(6, new DateExtended(2019, 1, 6))
+      .set(0, new FlexDate('2018-12-31'))
+      .set(1, new FlexDate('2019-01-01'))
+      .set(2, new FlexDate('2019-01-02'))
+      .set(3, new FlexDate('2019-01-03'))
+      .set(4, new FlexDate('2019-01-04'))
+      .set(5, new FlexDate('2019-01-05'))
+      .set(6, new FlexDate('2019-01-06'))
     let actual = this.__component.getWeek(2019, 2)
     assert.deepEqual(expected, actual)
   }

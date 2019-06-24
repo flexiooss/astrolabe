@@ -1,9 +1,12 @@
 import {DaysEnum} from '../types/DaysEnum'
-import {MonthBuilder} from '../types/Month'
 import {DayList} from '../types/week/DayList'
 import {DateExtended} from '@flexio-oss/extended-flex-types'
-import {WeekBuilder} from '../types/Week'
 import {WeekList} from '../types/month/WeekList'
+import {globalFlexioImport} from '@flexio-oss/global-import-registry'
+
+
+const WeekBuilder = globalFlexioImport.io.flexio.astrolabe.types.WeekBuilder
+const MonthBuilder = globalFlexioImport.io.flexio.astrolabe.types.MonthBuilder
 
 export class GetDate {
   /**
@@ -41,7 +44,7 @@ export class GetDate {
       let dayList = new DayList()
       while (currentDayId < 7 && currentDay <= monthSize) {
         currentDate = new DateExtended(year, month, currentDay)
-        dayList.set(currentDayId, currentDate)
+        dayList.set(currentDayId, currentDate.toLocaleFlexDate())
         currentDayId++
         currentDay++
       }

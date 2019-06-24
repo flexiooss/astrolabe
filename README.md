@@ -41,6 +41,6 @@ Week:
     year: int
     month: int
     week: int
-    days: DayList -> Map\<DateExtended>
+    days: DayList -> Map\<FlexDate>
 
 ```

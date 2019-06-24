@@ -1,9 +1,11 @@
 import {GetDate} from '../../utils/GetDate'
 import {MonthList} from '../../types/year/MonthList'
-import {Year} from '../../types/Year'
 import {DayList} from '../../types/week/DayList'
 import {DateExtended} from '@flexio-oss/extended-flex-types'
 import {assert, isNumber} from '@flexio-oss/assert'
+import {globalFlexioImport} from '@flexio-oss/global-import-registry'
+
+const YearBuilder = globalFlexioImport.io.flexio.astrolabe.types.YearBuilder
 
 export class StoreCalendarHandler {
   /**
@@ -58,7 +60,7 @@ export class StoreCalendarHandler {
     let res = null
     let yearList = this.__calendar().years()
     if (!this.__calendar().years().has(year)) {
-      yearList.set(year, new Year(year, new MonthList()))
+      yearList.set(year, new YearBuilder().year(year).months(new MonthList()).build())
     }
     if (!yearList.get(year).months().has(month)) {
       yearList.get(year).withMonths(new MonthList())
