@@ -20,7 +20,7 @@
   "dependencies": {
     "@flexio-oss/assert": "0.0.0",
     "@flexio-oss/hotballoon": "0.1.0-dev",
-    "@flexio-oss/extended-flex-types": "0.1.0-dev",
+    "@flexio-oss/extended-flex-types": "0.2.0",
     "@flexio-oss/js-generator-helpers": "0.0.0",
     "@flexio-oss/global-import-registry": "0.0.0",
     "@flexio-oss/js-logger": "0.1.0-dev",
