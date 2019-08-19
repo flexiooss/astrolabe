@@ -7,11 +7,7 @@ const StoreCalendar = globalFlexioImport.io.flexio.astrolabe.stores.StoreCalenda
 const StoreCalendarBuilder = globalFlexioImport.io.flexio.astrolabe.stores.StoreCalendarBuilder
 
 export class StoreCalendarUtils {
-  constructor(componentContext) {
-    assertType(TypeCheck.isComponentContext(componentContext),
-      'StoreCalendarUtils:constructor: `componentContext` should be a ComponentContext'
-    )
-    this.__componentContext = componentContext
+  constructor() {
     this.__store = null
     this.__storePublic = null
   }
@@ -20,8 +16,11 @@ export class StoreCalendarUtils {
    *
    * @returns {StoreCalendarUtils}
    */
-  build() {
-    this.__store = this.__componentContext.addStore(StoreBuilder.InMemory(
+  build(componentContext) {
+    assertType(TypeCheck.isComponentContext(componentContext),
+      'StoreCalendarUtils:constructor: `componentContext` should be a ComponentContext'
+    )
+    this.__store = componentContext.addStore(StoreBuilder.InMemory(
       new InMemoryStoreParams(
         new StoreTypeParam(
           StoreCalendar,

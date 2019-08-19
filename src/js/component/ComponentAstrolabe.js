@@ -22,7 +22,7 @@ export class ComponentAstrolabe {
      * @type {StoreCalendarUtils}
      * @private
      */
-    this.__storeCalendar = new StoreCalendarUtils(this.__componentContext).build()
+    this.__storeCalendar = new StoreCalendarUtils().build(this.__componentContext)
 
     /**
      *
