@@ -1,10 +1,9 @@
-import './generated/io/package'
 import {deepKeyAssigner} from '@flexio-oss/js-generator-helpers'
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
-import {YearList, YearListBuilder} from './src/js/types/calendar/YearList'
-import {MonthList, MonthListBuilder} from './src/js/types/year/MonthList'
-import {WeekList, WeekListBuilder} from './src/js/types/month/WeekList'
-import {DayList, DayListBuilder} from './src/js/types/week/DayList'
+import {YearList, YearListBuilder} from './calendar/YearList'
+import {MonthList, MonthListBuilder} from './year/MonthList'
+import {WeekList, WeekListBuilder} from './month/WeekList'
+import {DayList, DayListBuilder} from './week/DayList'
 
 /**
  * @property {YearList}  YearList

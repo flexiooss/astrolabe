@@ -10,7 +10,7 @@ const YearBuilder = globalFlexioImport.io.flexio.astrolabe.types.YearBuilder
 export class StoreCalendarHandler {
   /**
    *
-   * @param {Store<StoreCalendar>} store
+   * @param {Store<Calendar>} store
    * @param {DaysEnum} startingDay
    */
   constructor(store, startingDay) {
@@ -23,7 +23,7 @@ export class StoreCalendarHandler {
    * @private
    */
   __calendar() {
-    return this.__store.state().data
+    return this.__store.state().data()
   }
 
   /**
@@ -38,6 +38,23 @@ export class StoreCalendarHandler {
     let w = 7 * (weekNumber - 1) - (((firstDayOfWeek.getDay() - this.__startingDay) + 7) % 7)
     firstDayOfWeek.setDate(w + 1)
     return firstDayOfWeek
+  }
+
+  /**
+   *
+   * @param {Number} year
+   */
+  addYear(year) {
+    assert(
+      isNumber(year), 'StoreCalendarHandler:addYear: year should be a number, `%s` given',
+      typeof (year)
+    )
+    let yearList = this.__calendar().years()
+    if (!yearList.has(year) || yearList.months().size !== 12) {
+      for (let i = 0; i < 12; i++) {
+        this.addMonth(year, i)
+      }
+    }
   }
 
   /**
@@ -60,31 +77,16 @@ export class StoreCalendarHandler {
     let res = null
     let yearList = this.__calendar().years()
     if (!this.__calendar().years().has(year)) {
-      yearList.set(year, new YearBuilder().year(year).months(new MonthList()).build())
+      yearList = yearList.with(year, new YearBuilder().year(year).months(new MonthList()).build())
     }
+
     if (!yearList.get(year).months().has(month)) {
       yearList.get(year).withMonths(new MonthList())
       res = GetDate.getMonth(year, month, this.__startingDay)
-      yearList.get(year)
-        .months().set(month, res)
-      this.__store.set(this.__store.state().data.withYears(yearList))
-    }
-  }
-
-  /**
-   *
-   * @param {Number} year
-   */
-  addYear(year) {
-    assert(
-      isNumber(year), 'StoreCalendarHandler:addYear: year should be a number, `%s` given',
-      typeof (year)
-    )
-    let yearList = this.__calendar().years()
-    if (!(yearList.has(year) && yearList.months().size === 12)) {
-      for (let i = 0; i < 12; i++) {
-        this.addMonth(year, i)
-      }
+      let monthList = yearList.get(year).months().with(month, res)
+      let currentYear = yearList.get(year).withMonths(monthList)
+      yearList = yearList.with(year, currentYear)
+      this.__store.set(this.__store.state().data().withYears(yearList))
     }
   }
 

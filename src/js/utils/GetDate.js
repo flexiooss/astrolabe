@@ -24,6 +24,20 @@ export class GetDate {
   /**
    *
    * @param {number} year
+   * @param {number} weekNumber
+   * @param {DaysEnum} startingDay
+   * @return {Date}
+   */
+  static firstDayOfWeek(year, weekNumber, startingDay) {
+    let firstDayOfWeek = new DateExtended(year, 0, 1)
+    let w = 7 * (weekNumber - 1) - (((firstDayOfWeek.getDay() - startingDay) + 7) % 7)
+    firstDayOfWeek.setDate(w + 1)
+    return firstDayOfWeek
+  }
+
+  /**
+   *
+   * @param {number} year
    * @param {number} month
    * @param {DaysEnum} dayEnum
    * @return {Month}

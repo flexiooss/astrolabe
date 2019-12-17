@@ -1,9 +1,9 @@
+import '../../../index'
 import {TestCase} from 'code-altimeter-js'
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 import {DayList, DayListBuilder} from '../../js/types/week/DayList'
 import {FlexDate} from '@flexio-oss/flex-types'
 import {WeekList, WeekListBuilder} from '../../js/types/month/WeekList'
-import '../../../import'
 import {MonthList, MonthListBuilder} from '../../js/types/year/MonthList'
 import {YearList, YearListBuilder} from '../../js/types/calendar/YearList'
 
