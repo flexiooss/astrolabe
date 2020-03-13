@@ -1,7 +1,7 @@
 {
   "name": "@flexio-oss/astrolabe",
   "description": "Hotballoon package to generate dates",
-  "version": "0.0.0-dev",
+  "version": "0.0.0",
   "main": "index.js",
   "author": "Antoine Bachetti (https://github.com/AntoineBcht)",
   "repository": "git@github.com:flexiooss/astrolabe.git",

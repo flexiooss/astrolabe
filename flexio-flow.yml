@@ -1,3 +1,4 @@
-level: dev
+level: stable
 schemes: [package]
+topics: [36]
 version: 0.0.0
