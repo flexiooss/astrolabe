@@ -17,12 +17,12 @@
       }
     }
   },
-  "dependencies": {
-    "@flexio-corp/hotballoon-common-parent": "0.2.0-dev"
-  },
   "devDependencies": {
     "code-altimeter-js": "https://github.com/flexiooss/code-altimeter-js.git",
     "@flexio-oss/hotballoon-test-dummies": "1.0.0-dev"
+  },
+  "dependencies": {
+    "@flexio-corp/component-styled-parent": "1.1.0"
   },
   "peerDependencies": {
     "@flexio-oss/assert": ">0.0.0",
