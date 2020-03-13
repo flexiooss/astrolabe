@@ -1,7 +1,7 @@
 {
   "name": "@flexio-oss/astrolabe",
   "description": "Hotballoon package to generate dates",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "index.js",
   "author": "Antoine Bachetti (https://github.com/AntoineBcht)",
   "repository": "git@github.com:flexiooss/astrolabe.git",
@@ -19,11 +19,10 @@
   },
   "devDependencies": {
     "code-altimeter-js": "https://github.com/flexiooss/code-altimeter-js.git",
-    "@flexio-oss/hotballoon-test-dummies": "1.0.0-dev"
-  },
-  "dependencies": {
+    "@flexio-oss/hotballoon-test-dummies": "1.0.0-dev",
     "@flexio-corp/component-styled-parent": "1.1.0"
   },
+  "dependencies": {},
   "peerDependencies": {
     "@flexio-oss/assert": ">0.0.0",
     "@flexio-oss/hotballoon": ">0.0.0",
